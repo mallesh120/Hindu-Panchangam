@@ -1,0 +1,26 @@
+{
+  "name": "panchangam",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "generate": "npm run build && node dist/index.js",
+    "validate": "npm run build && node dist/validate.js",
+    "debug": "npm run build && node dist/debug.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "astronomy-engine": "^2.1.19",
+    "ical-generator": "^9.0.0",
+    "luxon": "^3.6.1"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.6.2",
+    "@types/node": "^24.0.3",
+    "typescript": "^5.8.3"
+  }
+}
