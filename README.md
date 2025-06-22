@@ -1,179 +1,171 @@
-# Panchangam Calendar Generator
+# Panchangam JS
 
-A high-precision Vedic Panchangam (Hindu Almanac) calendar generator built with TypeScript and modern astronomical calculations. This project generates accurate panchangam data including tithi, nakshatra, yoga, karana, and astronomical timings for any location worldwide.
+A TypeScript/JavaScript library for calculating Indian Panchangam (Hindu Calendar) elements including Tithi, Nakshatra, Yoga, Karana, and Vara using Swiss Ephemeris astronomical calculations.
 
 ## Features
 
-- **High Precision Calculations**: Uses the `astronomy-engine` library based on VSOP87 astronomical models
-- **Complete Panchangam Elements**: 
-  - Tithi (lunar phases) with start/end times
-  - Nakshatra (lunar mansions) with start/end times
-  - Yoga (sun-moon combinations) with start/end times
-  - Karana (half-tithi periods)
-  - Rahu Kalam (inauspicious time periods)
-- **Astronomical Timings**: Sunrise, sunset, moonrise, moonset
-- **Location Support**: Works for any location worldwide
-- **Time Zone Support**: Accurate time zone handling
-- **HTML Output**: Beautiful, responsive calendar layout
-- **Validation Tools**: Built-in validation against authoritative sources
+- **Tithi Calculation**: Calculate lunar phases and tithi (lunar day)
+- **Nakshatra**: Determine the lunar mansion (nakshatra)
+- **Yoga**: Calculate the combination of solar and lunar longitudes
+- **Karana**: Determine the half-tithi periods
+- **Vara**: Calculate the day of the week
+- **Sunrise/Sunset**: Accurate sunrise and sunset times
+- **Moonrise/Moonset**: Lunar rise and set times
+- **End Times**: Calculate when tithi, nakshatra, and yoga end
+- **Rahu Kalam**: Calculate inauspicious time periods
 
 ## Installation
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd panchangam-js
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Compile TypeScript**:
-   ```bash
-   npm run build
-   ```
+```bash
+npm install panchangam-js
+```
 
 ## Usage
 
-### Generate Calendar
-```bash
-npm run generate
-```
-This will:
-- Compile TypeScript files
-- Generate `panchangam.html` for the configured location and month
-
-### Validate Calculations
-```bash
-npm run validate
-```
-This will:
-- Show detailed panchangam data for key dates
-- Display tithi, nakshatra, and astronomical timings
-- Help verify accuracy against authoritative sources
-
-### Debug Calculations
-```bash
-npm run debug
-```
-This will:
-- Show detailed astronomical calculations
-- Help identify Purnima and Amavasya dates
-- Display raw astronomical data for troubleshooting
-
-## Configuration
-
-### Location Settings
-Edit `src/index.ts` to set your location:
+### Basic Usage
 
 ```typescript
-const observerInfo = { 
-    latitude: 12.9716,        // Your latitude
-    longitude: 77.5946,       // Your longitude
-    elevation: 920,           // Elevation in meters
-    timeZone: "Asia/Kolkata"  // IANA time zone
-};
+import { getPanchangam, Observer } from 'panchangam-js';
+
+// Create an observer for a specific location
+const observer = new Observer(12.9716, 77.5946, 920); // Bangalore coordinates
+
+// Get panchangam for a specific date
+const date = new Date('2025-06-15');
+const panchangam = getPanchangam(date, observer);
+
+console.log('Tithi:', panchangam.tithi);
+console.log('Nakshatra:', panchangam.nakshatra);
+console.log('Yoga:', panchangam.yoga);
+console.log('Karana:', panchangam.karana);
+console.log('Vara:', panchangam.vara);
+console.log('Sunrise:', panchangam.sunrise);
+console.log('Sunset:', panchangam.sunset);
 ```
 
-### Month and Year
-Change the year and month in `src/index.ts`:
+### Generate HTML Calendar
 
 ```typescript
+import { generateHtmlCalendar } from 'panchangam-js';
+
 const year = 2025;
 const month = 6; // June
+const observer = new Observer(12.9716, 77.5946, 920);
+const timeZone = 'Asia/Kolkata';
+
+const htmlContent = generateHtmlCalendar(year, month, observer, timeZone);
+// Save to file or serve as web page
 ```
 
-## Project Structure
+### Available Constants
 
-```
-panchangam-js/
-├── src/
-│   ├── index.ts          # Main entry point
-│   ├── panchangam.ts     # Core panchangam calculations
-│   ├── generator.ts      # HTML calendar generator
-│   ├── validate.ts       # Validation script
-│   └── debug.ts          # Debug script
-├── dist/                 # Compiled JavaScript files
-├── panchangam.html       # Generated calendar output
-├── package.json
-└── README.md
+```typescript
+import { karanaNames, yogaNames } from 'panchangam-js';
+
+// Karana names: ["Bava", "Balava", "Kaulava", "Taitila", "Gara", "Vanija", "Vishti", "Shakuni", "Chatushpada", "Naga", "Kimstughna"]
+console.log('Karana:', karanaNames[panchangam.karana]);
+
+// Yoga names: ["Vishkambha", "Priti", "Ayushman", ...]
+console.log('Yoga:', yogaNames[panchangam.yoga]);
 ```
 
-## Calculation Methodology
+## API Reference
 
-This project uses **Drik Ganita** methodology, which is the modern standard for accurate panchangam calculations:
+### `getPanchangam(date: Date, observer: Observer): Panchangam`
 
-- **Tithi**: Calculated from the angular difference between Sun and Moon longitudes
-- **Nakshatra**: Based on Moon's position relative to fixed stars
-- **Yoga**: Combination of Sun and Moon longitudes
-- **Karana**: Half of a tithi period
-- **Astronomical Timings**: Using high-precision ephemeris data
+Returns a complete panchangam object for the given date and location.
 
-### Validation
-The calculations have been validated against [Drik Panchang](https://www.drikpanchang.com/) and other authoritative sources, showing excellent agreement.
+**Parameters:**
+- `date`: JavaScript Date object
+- `observer`: Astronomy Engine Observer object with latitude, longitude, and elevation
 
-## Customization
+**Returns:**
+```typescript
+interface Panchangam {
+    tithi: number;                    // 0-29 (Prathama to Amavasya/Purnima)
+    nakshatra: number;               // 0-26 (Ashwini to Revati)
+    yoga: number;                    // 0-26 (Vishkambha to Vaidhriti)
+    karana: string;                  // Karana name
+    vara: number;                    // 0-6 (Sunday to Saturday)
+    sunrise: Date | null;            // Sunrise time
+    sunset: Date | null;             // Sunset time
+    moonrise: Date | null;           // Moonrise time
+    moonset: Date | null;            // Moonset time
+    nakshatraStartTime: Date | null; // When current nakshatra started
+    nakshatraEndTime: Date | null;   // When current nakshatra ends
+    tithiStartTime: Date | null;     // When current tithi started
+    tithiEndTime: Date | null;       // When current tithi ends
+    yogaEndTime: Date | null;        // When current yoga ends
+    rahuKalamStart: Date | null;     // Rahu Kalam start time
+    rahuKalamEnd: Date | null;       // Rahu Kalam end time
+}
+```
 
-### Adding New Languages
-1. Create a new locale file in `src/locales/` (e.g., `hi.ts` for Hindi)
-2. Define translations for all text elements
-3. Import and use the locale in the generator
+### `generateHtmlCalendar(year: number, month: number, observer: Observer, timeZone: string): string`
 
-### Styling
-Modify the CSS in `src/generator.ts` to customize the calendar appearance.
+Generates a complete HTML calendar for the specified month.
 
-### Additional Features
-- Add more panchangam elements (Gulika Kalam, Abhijit Muhurat, etc.)
-- Implement different calendar layouts
-- Add festival calculations
-- Export to different formats (PDF, ICS, etc.)
+**Parameters:**
+- `year`: Year (e.g., 2025)
+- `month`: Month (1-12)
+- `observer`: Observer object for location
+- `timeZone`: IANA timezone string
+
+**Returns:** HTML string with complete calendar
 
 ## Dependencies
 
-- **astronomy-engine**: High-precision astronomical calculations
-- **luxon**: Date/time handling and timezone support
-- **typescript**: Type safety and modern JavaScript features
+- `astronomy-engine`: Swiss Ephemeris calculations
+- `luxon`: Date/time handling
+- `ical-generator`: ICS calendar generation
 
-## Scripts
+## Examples
 
-- `npm run build`: Compile TypeScript to JavaScript
-- `npm run generate`: Generate the HTML calendar
-- `npm run validate`: Run validation checks
-- `npm run debug`: Run detailed debugging
+### React Native Usage
 
-## Accuracy
+```typescript
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
+import { getPanchangam, Observer } from 'panchangam-js';
 
-The calculations are accurate to within:
-- **Tithi/Nakshatra times**: ±1 minute
-- **Astronomical timings**: ±1 minute
-- **Yoga calculations**: ±1 minute
+const PanchangamComponent = () => {
+    const [panchangam, setPanchangam] = useState(null);
+    
+    useEffect(() => {
+        const observer = new Observer(12.9716, 77.5946, 920);
+        const today = new Date();
+        const result = getPanchangam(today, observer);
+        setPanchangam(result);
+    }, []);
+    
+    if (!panchangam) return <Text>Loading...</Text>;
+    
+    return (
+        <View>
+            <Text>Tithi: {panchangam.tithi}</Text>
+            <Text>Nakshatra: {panchangam.nakshatra}</Text>
+            <Text>Sunrise: {panchangam.sunrise?.toLocaleTimeString()}</Text>
+        </View>
+    );
+};
+```
 
-This level of precision matches or exceeds most online panchangam sources.
+### Node.js Usage
 
-## Contributing
+```javascript
+const { getPanchangam, Observer } = require('panchangam-js');
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+const observer = new Observer(12.9716, 77.5946, 920);
+const date = new Date();
+const panchangam = getPanchangam(date, observer);
+
+console.log('Today\'s Panchangam:', panchangam);
+```
 
 ## License
 
-This project is open source. Please check the license file for details.
+MIT License
 
-## Acknowledgments
+## Contributing
 
-- Astronomical calculations based on VSOP87 theory
-- Validation against Drik Panchang and other authoritative sources
-- Built with modern TypeScript and astronomical libraries
-
-## Support
-
-For issues, questions, or contributions, please open an issue on the repository.
-
----
-
-**Note**: This panchangam follows the Nirayana (sidereal) system and uses modern astronomical calculations for maximum accuracy. 
+Contributions are welcome! Please feel free to submit a Pull Request. 

@@ -22,3 +22,16 @@ const htmlContent = generateHtmlCalendar(year, month, observer, observerInfo.tim
 fs.writeFileSync('panchangam.html', htmlContent);
 
 console.log('Successfully created panchangam.html');
+
+// Main exports for the panchangam-js package
+export { getPanchangam, getPanchangamDetails } from './panchangam';
+export { generateHtmlCalendar } from './generator';
+
+// Re-export types
+export type { 
+  Panchangam,
+  PanchangamDetails
+} from './panchangam';
+
+// Re-export constants
+export { karanaNames, yogaNames } from './panchangam';
