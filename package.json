@@ -13,8 +13,10 @@
     "build": "tsc",
     "prepublishOnly": "npm run build",
     "generate": "npm run build && node dist/index.js",
-    "validate": "npm run build && node dist/validate.js",
-    "debug": "npm run build && node dist/debug.js"
+    "validate": "npm run build && node dist/scripts/validate.js",
+    "validate-comparison": "npm run build && node dist/scripts/validate-comparison.js",
+    "debug": "npm run build && node dist/scripts/debug.js",
+    "simple-test": "npm run build && node dist/scripts/simple-test.js"
   },
   "keywords": [
     "panchangam",
@@ -40,6 +42,9 @@
   },
   "devDependencies": {
     "@types/luxon": "^3.6.2",
+    "@types/node": "^24.0.3",
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
     "typescript": "^5.8.3"
   },
   "engines": {

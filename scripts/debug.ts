@@ -1,5 +1,6 @@
 import { Observer, Body, GeoVector, Ecliptic } from "astronomy-engine";
 import { DateTime } from "luxon";
+import { getPanchangam } from './index';
 
 // San Diego location details
 const observerInfo = { 
@@ -105,4 +106,22 @@ const testDates = [
 
 testDates.forEach(date => {
     debugTithiCalculation(date);
-}); 
+});
+
+// Test: Print Panchangam for Bangalore, India for today
+const bangaloreObserver = new Observer(12.9716, 77.5946, 920);
+const today = new Date();
+const panchangam = getPanchangam(today, bangaloreObserver);
+
+console.log('--- Panchangam for Bangalore, India ---');
+console.log('Date:', today.toISOString().split('T')[0]);
+console.log('Tithi:', panchangam.tithi);
+console.log('Nakshatra:', panchangam.nakshatra);
+console.log('Yoga:', panchangam.yoga);
+console.log('Karana:', panchangam.karana);
+console.log('Vara:', panchangam.vara);
+console.log('Sunrise:', panchangam.sunrise);
+console.log('Sunset:', panchangam.sunset);
+console.log('Moonrise:', panchangam.moonrise);
+console.log('Moonset:', panchangam.moonset);
+console.log('--------------------------------------'); 
