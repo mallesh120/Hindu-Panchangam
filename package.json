@@ -1,6 +1,6 @@
 {
   "name": "panchangam-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Indian Panchangam (Hindu Calendar) library for calculating Tithi, Nakshatra, Yoga, Karana, and Vara using Swiss Ephemeris",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
