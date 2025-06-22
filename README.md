@@ -117,38 +117,8 @@ Generates a complete HTML calendar for the specified month.
 
 - `astronomy-engine`: Swiss Ephemeris calculations
 - `luxon`: Date/time handling
-- `ical-generator`: ICS calendar generation
 
 ## Examples
-
-### React Native Usage
-
-```typescript
-import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { getPanchangam, Observer } from 'panchangam-js';
-
-const PanchangamComponent = () => {
-    const [panchangam, setPanchangam] = useState(null);
-    
-    useEffect(() => {
-        const observer = new Observer(12.9716, 77.5946, 920);
-        const today = new Date();
-        const result = getPanchangam(today, observer);
-        setPanchangam(result);
-    }, []);
-    
-    if (!panchangam) return <Text>Loading...</Text>;
-    
-    return (
-        <View>
-            <Text>Tithi: {panchangam.tithi}</Text>
-            <Text>Nakshatra: {panchangam.nakshatra}</Text>
-            <Text>Sunrise: {panchangam.sunrise?.toLocaleTimeString()}</Text>
-        </View>
-    );
-};
-```
 
 ### Node.js Usage
 
@@ -161,6 +131,29 @@ const panchangam = getPanchangam(date, observer);
 
 console.log('Today\'s Panchangam:', panchangam);
 ```
+
+### Browser Usage
+
+```html
+<script type="module">
+import { getPanchangam, Observer } from 'https://unpkg.com/panchangam-js/dist/index.js';
+
+const observer = new Observer(12.9716, 77.5946, 920);
+const date = new Date();
+const panchangam = getPanchangam(date, observer);
+
+console.log('Today\'s Panchangam:', panchangam);
+</script>
+```
+
+## Environment Compatibility
+
+This library is designed to work in any JavaScript environment:
+- Node.js
+- Browser (with ES modules)
+- React applications
+- React Native applications
+- Other JavaScript frameworks
 
 ## License
 

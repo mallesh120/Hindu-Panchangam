@@ -36,12 +36,10 @@
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",
-    "ical-generator": "^9.0.0",
     "luxon": "^3.6.1"
   },
   "devDependencies": {
     "@types/luxon": "^3.6.2",
-    "@types/node": "^24.0.3",
     "typescript": "^5.8.3"
   },
   "engines": {
