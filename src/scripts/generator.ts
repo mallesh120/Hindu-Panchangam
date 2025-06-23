@@ -1,5 +1,5 @@
 import { Observer, Body, SearchRiseSet } from 'astronomy-engine';
-import { getPanchangam, Panchangam, yogaNames, karanaNames } from "../src/panchangam";
+import { getPanchangam, Panchangam, yogaNames, karanaNames } from "../panchangam";
 import { DateTime } from "luxon";
 
 // Re-using the name arrays from index.ts. In a larger app, we might centralize these.

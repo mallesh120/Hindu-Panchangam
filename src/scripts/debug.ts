@@ -1,6 +1,6 @@
 import { Observer, Body, GeoVector, Ecliptic } from "astronomy-engine";
 import { DateTime } from "luxon";
-import { getPanchangam } from './index';
+import { getPanchangam } from '../index';
 
 // San Diego location details
 const observerInfo = { 

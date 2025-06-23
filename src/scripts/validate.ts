@@ -1,5 +1,5 @@
 import { Observer } from "astronomy-engine";
-import { getPanchangam } from "./panchangam";
+import { getPanchangam } from "../panchangam";
 import { DateTime } from "luxon";
 
 // San Diego location details

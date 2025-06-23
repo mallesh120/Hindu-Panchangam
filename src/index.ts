@@ -7,8 +7,9 @@ export { getPanchangam, getPanchangamDetails } from './panchangam';
 // Re-export types
 export type { 
   Panchangam,
-  PanchangamDetails
+  PanchangamDetails,
+  KaranaTransition
 } from './panchangam';
 
 // Re-export constants
-export { karanaNames, yogaNames } from './panchangam';
+export { karanaNames, yogaNames, tithiNames, nakshatraNames } from './panchangam';

@@ -1,4 +1,4 @@
-import { getPanchangam } from './index';
+import { getPanchangam } from '../index';
 import { Observer } from 'astronomy-engine';
 
 // Simple test to verify the library is working

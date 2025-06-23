@@ -1,5 +1,7 @@
 # Panchangam JS
 
+> **Note:** This package is now maintained under the [ishubhamx](https://github.com/ishubhamx) organization as `@ishubhamx/panchangam-js`.
+
 A TypeScript/JavaScript library for calculating Indian Panchangam (Hindu Calendar) elements including Tithi, Nakshatra, Yoga, Karana, and Vara using Swiss Ephemeris astronomical calculations.
 
 ## Features
@@ -17,7 +19,7 @@ A TypeScript/JavaScript library for calculating Indian Panchangam (Hindu Calenda
 ## Installation
 
 ```bash
-npm install panchangam-js
+npm install @ishubhamx/panchangam-js
 ```
 
 ## Usage
@@ -25,7 +27,7 @@ npm install panchangam-js
 ### Basic Usage
 
 ```typescript
-import { getPanchangam, Observer } from 'panchangam-js';
+import { getPanchangam, Observer } from '@ishubhamx/panchangam-js';
 
 // Create an observer for a specific location
 const observer = new Observer(12.9716, 77.5946, 920); // Bangalore coordinates
@@ -46,7 +48,7 @@ console.log('Sunset:', panchangam.sunset);
 ### Generate HTML Calendar
 
 ```typescript
-import { generateHtmlCalendar } from 'panchangam-js';
+import { generateHtmlCalendar } from '@ishubhamx/panchangam-js';
 
 const year = 2025;
 const month = 6; // June
@@ -60,7 +62,7 @@ const htmlContent = generateHtmlCalendar(year, month, observer, timeZone);
 ### Available Constants
 
 ```typescript
-import { karanaNames, yogaNames } from 'panchangam-js';
+import { karanaNames, yogaNames } from '@ishubhamx/panchangam-js';
 
 // Karana names: ["Bava", "Balava", "Kaulava", "Taitila", "Gara", "Vanija", "Vishti", "Shakuni", "Chatushpada", "Naga", "Kimstughna"]
 console.log('Karana:', karanaNames[panchangam.karana]);
@@ -123,7 +125,7 @@ Generates a complete HTML calendar for the specified month.
 ### Node.js Usage
 
 ```javascript
-const { getPanchangam, Observer } = require('panchangam-js');
+const { getPanchangam, Observer } = require('@ishubhamx/panchangam-js');
 
 const observer = new Observer(12.9716, 77.5946, 920);
 const date = new Date();
@@ -136,7 +138,7 @@ console.log('Today\'s Panchangam:', panchangam);
 
 ```html
 <script type="module">
-import { getPanchangam, Observer } from 'https://unpkg.com/panchangam-js/dist/index.js';
+import { getPanchangam, Observer } from 'https://unpkg.com/@ishubhamx/panchangam-js/dist/index.js';
 
 const observer = new Observer(12.9716, 77.5946, 920);
 const date = new Date();

@@ -1,4 +1,4 @@
-import { getPanchangam, karanaNames, yogaNames } from './index';
+import { getPanchangam, karanaNames, yogaNames } from '../index';
 import { Observer } from 'astronomy-engine';
 import { DateTime } from 'luxon';
 import * as cheerio from 'cheerio';
@@ -96,7 +96,7 @@ async function scrapeDrikPanchangData(date: Date): Promise<ComparisonResult['dri
         const [year, month, day] = dateStr.split('-');
         
         // Use a different URL format that might work better
-        const url = `https://www.drikpanchang.com/panchang/day-panchang.html?date=${month}/${day}/${year}&geoname-id=1277333`;
+        const url = `https://www.drikpanchang.com/panchang/day-panchang.html?date=${day}/${month}/${year}&geoname-id=1277333`;
         
         console.log(`Scraping Drik Panchang: ${url}`);
         
@@ -320,8 +320,8 @@ export async function runValidation() {
     console.log('');
     
     const testDates = [
-        new Date('2025-06-22'),
-        new Date('2025-06-21')
+        new Date(),
+        
     ];
     
     for (const date of testDates) {
