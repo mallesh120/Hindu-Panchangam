@@ -1,6 +1,5 @@
 # Panchangam JS
 
-> **Note:** This package is now maintained under the [ishubhamx](https://github.com/ishubhamx) organization as `@ishubhamx/panchangam-js`.
 
 A TypeScript/JavaScript library for calculating Indian Panchangam (Hindu Calendar) elements including Tithi, Nakshatra, Yoga, Karana, and Vara using Swiss Ephemeris astronomical calculations.
 
